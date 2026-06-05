@@ -6,7 +6,7 @@
     "dev": "vite",
     "server": "node server/server.js",
     "build": "vite build",
-    "start": "node frontend-server.js",
+    "start": "serve -s dist -l 3000",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -21,7 +21,8 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^6.20.0",
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "serve": "^14.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

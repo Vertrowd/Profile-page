@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: login-page-frontend
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    routes:
+      - path: /*
+        handleCors: true

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_ENDPOINTS } from './config';
 import './Auth.css';
 
 export default function Signup() {
@@ -69,7 +70,7 @@ export default function Signup() {
                 data.append('profileImage', profileImage);
             }
 
-            const response = await axios.post('http://localhost:5000/api/auth/signup', data, {
+            const response = await axios.post(API_ENDPOINTS.SIGNUP, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_ENDPOINTS } from './config';
 import './Auth.css';
 
 export default function Login() {
@@ -27,7 +28,7 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+            const response = await axios.post(API_ENDPOINTS.LOGIN, formData);
             
             // Store token in localStorage
             localStorage.setItem('token', response.data.token);

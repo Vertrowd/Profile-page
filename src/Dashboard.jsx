@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL, API_ENDPOINTS } from './config';
 import './Dashboard.css';
 
 export default function Dashboard() {
@@ -18,7 +19,6 @@ export default function Dashboard() {
     const [imagePreview, setImagePreview] = useState(null);
     const [updatingImage, setUpdatingImage] = useState(false);
     const navigate = useNavigate();
-    const API_URL = 'http://localhost:5000';
 
     useEffect(() => {
         fetchUserData();
@@ -32,7 +32,7 @@ export default function Dashboard() {
                 return;
             }
 
-            const response = await axios.get(`${API_URL}/api/user/profile`, {
+            const response = await axios.get(API_ENDPOINTS.GET_PROFILE, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -83,7 +83,7 @@ export default function Dashboard() {
     const handleSaveProfile = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.put(`${API_URL}/api/user/profile`, editForm, {
+            const response = await axios.put(API_ENDPOINTS.UPDATE_PROFILE, editForm, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -109,7 +109,7 @@ export default function Dashboard() {
             const formData = new FormData();
             formData.append('profileImage', newImage);
 
-            const response = await axios.put(`${API_URL}/api/user/profile-image`, formData, {
+            const response = await axios.put(API_ENDPOINTS.UPDATE_PROFILE_IMAGE, formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -130,7 +130,7 @@ export default function Dashboard() {
     const handleDeleteImage = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.delete(`${API_URL}/api/user/profile-image`, {
+            const response = await axios.delete(API_ENDPOINTS.DELETE_PROFILE_IMAGE, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -179,7 +179,7 @@ export default function Dashboard() {
                     <div className="profile-image-section">
                         <h3>Profile Picture</h3>
                         {user?.profileImage ? (
-                            <img src={`${API_URL}${user.profileImage}`} alt="Profile" className="profile-image" />
+                            <img src={`${API_BASE_URL}${user.profileImage}`} alt="Profile" className="profile-image" />
                         ) : (
                             <div className="profile-image-placeholder">
                                 <span>No Image</span>
